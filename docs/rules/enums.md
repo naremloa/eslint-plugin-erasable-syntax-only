@@ -1,3 +1,9 @@
-# Avoid using TypeScript's enums (`erasable-syntax-only/enums`)
+# erasable-syntax-only/enums
 
 <!-- end auto-generated rule header -->
+
+Enforces that code doesn't use TypeScript's `enum`s:
+
+```ts
+enum Values {}
+```
