@@ -1,7 +1,7 @@
 <h1 align="center">Eslint Plugin Erasable Syntax Only</h1>
 
 <p align="center">
-	ESLint plugin to granularly enforce TypeScript's `erasableSyntaxOnly` flag.
+	ESLint plugin to granularly enforce TypeScript's <code>erasableSyntaxOnly</code> flag.
 	❎
 </p>
 
@@ -20,15 +20,94 @@
 
 ## Usage
 
+Add this plugin to the list of plugins in your [ESLint configuration file](https://eslint.org/docs/latest/use/configure/configuration-files):
+
 ```shell
-npm i eslint-plugin-erasable-syntax-only
+npm i eslint-plugin-erasable-syntax-only -D
 ```
 
 ```ts
-import { greet } from "eslint-plugin-erasable-syntax-only";
+import eslint from "@eslint/js";
+import erasableSyntaxOnly from "eslint-plugin-erasable-syntax-only";
+import tseslint from "typescript-eslint";
 
-greet("Hello, world! 💖");
+export default tseslint.config(
+	eslint.configs.recommended,
+	tseslint.configs.recommended,
+	erasableSyntaxOnly.configs.recommended, // 👈
+);
 ```
+
+<!-- begin auto-generated rules list -->
+
+| Name                                                       | Description                                          |
+| :--------------------------------------------------------- | :--------------------------------------------------- |
+| [enums](docs/rules/enums.md)                               | Avoid using TypeScript's enums.                      |
+| [import-aliases](docs/rules/import-aliases.md)             | Avoid using TypeScript's import aliases.             |
+| [namespaces](docs/rules/namespaces.md)                     | Avoid using TypeScript's namespaces.                 |
+| [parameter-properties](docs/rules/parameter-properties.md) | Avoid using TypeScript's class parameter properties. |
+
+<!-- end auto-generated rules list -->
+
+> This plugin requires ESLint >=9 and Node.js >=20.18.0.
+
+## What?
+
+`eslint-plugin-erasable-syntax-only` is an [ESLint plugin](https://eslint.org/docs/latest/use/configure/plugins).
+It provides rules that report on using syntax that will not be allowed by TypeScript's [`--erasableSyntaxOnly` option](https://devblogs.microsoft.com/typescript/announcing-typescript-5-8-beta/#the---erasablesyntaxonly-option).
+
+> Recently, Node.js 23.6 unflagged [experimental support for running TypeScript files directly](https://nodejs.org/api/typescript.html#type-stripping); however, only certain constructs are supported under this mode.
+>
+> ...
+>
+> TypeScript 5.8 introduces the `--erasableSyntaxOnly` flag.
+> When this flag is enabled, TypeScript will only allow you to use constructs that can be erased from a file, and will issue an error if it encounters any constructs that cannot be erased.
+
+## Why?
+
+If you've already enabled TypeScript's `--erasableSyntaxOnly` option then you do not need this plugin.
+This plugin reports the same way as TypeScript.
+
+However, it can be difficult to enable TypeScript options like `--erasableSyntaxOnly` if you have many existing violations.
+Converting many lines of existing code to new forms can take a lot of time in larger projects.
+TypeScript compiler options can only be configured at the TSConfig-level, not individually per-file.
+
+`eslint-plugin-erasable-syntax-only` allows for more gradual migrations towards only using erasable syntax.
+It allows you to:
+
+- Enable only one rule at a time
+- Restrict which rules apply to which files
+- Use granular ESLint [`eslint-disable` comments](https://eslint.org/docs/latest/use/configure/rules#using-configuration-comments-1) instead of [`// @ts-expect-error`s](https://www.learningtypescript.com/articles/comment-directives#ts-expect-error)
+
+For example, this config avoids banning enums in specific files:
+
+```ts
+import erasableSyntaxOnly from "eslint-plugin-erasable-syntax-only";
+import tseslint from "typescript-eslint";
+
+export default [tseslint.configs.recommended];
+
+export default tseslint.config(
+	eslint.configs.recommended,
+	tseslint.configs.recommended,
+	erasableSyntaxOnly.configs.recommended,
+	// TODO (GH#123)
+	{
+		files: ["src/some/files/*.ts"],
+		rules: {
+			"erasable-syntax-only/enums": "off",
+		},
+	},
+);
+```
+
+> 💡 Tip: Put a _TODO_ comment linking to a tracking issue/ticket on any temporary disables of rules.
+> It will help you keep track of pending work.
+
+### See Also
+
+- [`@typescript-eslint/no-namespace`](https://typescript-eslint.io/rules/no-namespace): Dedicated, more granular typescript-eslint rule for reporting `namespace`s
+- [`@typescript-eslint/parameter-properties`](https://typescript-eslint.io/rules/parameter-properties): Dedicated, more granular typescript-eslint rule for parameter properties
 
 ## Development
 
@@ -37,4 +116,4 @@ Thanks! 💖
 
 <!-- You can remove this notice if you don't want it 🙂 no worries! -->
 
-> 💝 This package was templated with [`create-typescript-app`](https://github.com/JoshuaKGoldberg/create-typescript-app) using the [`create` engine](https://create.bingo).
+> 💝 This package was templated with [`create-typescript-app`](https://github.com/JoshuaKGoldberg/create-typescript-app) using the [Bingo engine](https://create.bingo).

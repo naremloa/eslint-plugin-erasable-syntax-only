@@ -60,6 +60,7 @@ export default tseslint.config(
 				"error",
 				{ allowModules: ["eslint-plugin-erasable-syntax-only"] },
 			],
+			"n/no-unpublished-import": "off",
 		},
 	},
 	{
