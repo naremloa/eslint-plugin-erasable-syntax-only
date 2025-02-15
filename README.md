@@ -1,7 +1,7 @@
-<h1 align="center">Eslint Plugin Erasable Syntax Only</h1>
+<h1 align="center">eslint-plugin-erasable-syntax-only</h1>
 
 <p align="center">
-	ESLint plugin to granularly enforce TypeScript's <code>erasableSyntaxOnly</code> flag.
+	ESLint plugin to granularly enforce TypeScript's <a href="https://devblogs.microsoft.com/typescript/announcing-typescript-5-8-rc/#the---erasablesyntaxonly-option"><code>erasableSyntaxOnly</code></a> flag.
 	❎
 </p>
 
@@ -38,6 +38,10 @@ export default tseslint.config(
 );
 ```
 
+### Rules
+
+These are all set to `"error"` in the recommended config:
+
 <!-- begin auto-generated rules list -->
 
 | Name                                                       | Description                                          |
@@ -54,7 +58,7 @@ export default tseslint.config(
 ## What?
 
 `eslint-plugin-erasable-syntax-only` is an [ESLint plugin](https://eslint.org/docs/latest/use/configure/plugins).
-It provides rules that report on using syntax that will not be allowed by TypeScript's [`--erasableSyntaxOnly` option](https://devblogs.microsoft.com/typescript/announcing-typescript-5-8-beta/#the---erasablesyntaxonly-option).
+It provides rules that report on using syntax that will not be allowed by TypeScript's [`--erasableSyntaxOnly` option](https://devblogs.microsoft.com/typescript/announcing-typescript-5-8-beta/#the---erasablesyntaxonly-option):
 
 > Recently, Node.js 23.6 unflagged [experimental support for running TypeScript files directly](https://nodejs.org/api/typescript.html#type-stripping); however, only certain constructs are supported under this mode.
 >
@@ -66,11 +70,9 @@ It provides rules that report on using syntax that will not be allowed by TypeSc
 ## Why?
 
 If you've already enabled TypeScript's `--erasableSyntaxOnly` option then you do not need this plugin.
-This plugin reports the same way as TypeScript.
 
-However, it can be difficult to enable TypeScript options like `--erasableSyntaxOnly` if you have many existing violations.
-Converting many lines of existing code to new forms can take a lot of time in larger projects.
-TypeScript compiler options can only be configured at the TSConfig-level, not individually per-file.
+However, if you have many existing violations, it can be time-consuming to enable TypeScript options like `--erasableSyntaxOnly`.
+TypeScript compiler options can only be configured widely at the TSConfig-level, not granularly per-file.
 
 `eslint-plugin-erasable-syntax-only` allows for more gradual migrations towards only using erasable syntax.
 It allows you to:
@@ -85,13 +87,11 @@ For example, this config avoids banning enums in specific files:
 import erasableSyntaxOnly from "eslint-plugin-erasable-syntax-only";
 import tseslint from "typescript-eslint";
 
-export default [tseslint.configs.recommended];
-
 export default tseslint.config(
 	eslint.configs.recommended,
 	tseslint.configs.recommended,
 	erasableSyntaxOnly.configs.recommended,
-	// TODO (GH#123)
+	// TODO (#...)
 	{
 		files: ["src/some/files/*.ts"],
 		rules: {
@@ -102,7 +102,7 @@ export default tseslint.config(
 ```
 
 > 💡 Tip: Put a _TODO_ comment linking to a tracking issue/ticket on any temporary disables of rules.
-> It will help you keep track of pending work.
+> It will help keep track of pending work and indicate when rule disables aren't meant to stay long-term.
 
 ### See Also
 
@@ -113,7 +113,5 @@ export default tseslint.config(
 
 See [`.github/CONTRIBUTING.md`](./.github/CONTRIBUTING.md), then [`.github/DEVELOPMENT.md`](./.github/DEVELOPMENT.md).
 Thanks! 💖
-
-<!-- You can remove this notice if you don't want it 🙂 no worries! -->
 
 > 💝 This package was templated with [`create-typescript-app`](https://github.com/JoshuaKGoldberg/create-typescript-app) using the [Bingo engine](https://create.bingo).
