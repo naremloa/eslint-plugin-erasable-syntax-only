@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.2.1](https://github.com/JoshuaKGoldberg/eslint-plugin-erasable-syntax-only/compare/0.2.0...0.2.1) (2025-02-17)
+
+### Bug Fixes
+
+- **namespaces:** only report when there is value emit ([#27](https://github.com/JoshuaKGoldberg/eslint-plugin-erasable-syntax-only/issues/27)) ([e82fea5](https://github.com/JoshuaKGoldberg/eslint-plugin-erasable-syntax-only/commit/e82fea56232e52fe5d09dfd8b0d43b92b7f2b777)), closes [#22](https://github.com/JoshuaKGoldberg/eslint-plugin-erasable-syntax-only/issues/22)
+
 # [0.2.0](https://github.com/JoshuaKGoldberg/eslint-plugin-erasable-syntax-only/compare/0.1.0...0.2.0) (2025-02-16)
 
 ### Features
