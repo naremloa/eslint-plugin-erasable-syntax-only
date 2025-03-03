@@ -1,5 +1,11 @@
 # Changelog
 
+# [0.3.0](https://github.com/JoshuaKGoldberg/eslint-plugin-erasable-syntax-only/compare/0.2.1...0.3.0) (2025-03-03)
+
+### Features
+
+- add import alias suggestions to namespaces rule ([#29](https://github.com/JoshuaKGoldberg/eslint-plugin-erasable-syntax-only/issues/29)) ([f405821](https://github.com/JoshuaKGoldberg/eslint-plugin-erasable-syntax-only/commit/f405821c46d58f849df813efaf672d0ce8c5c035)), closes [#21](https://github.com/JoshuaKGoldberg/eslint-plugin-erasable-syntax-only/issues/21)
+
 ## [0.2.1](https://github.com/JoshuaKGoldberg/eslint-plugin-erasable-syntax-only/compare/0.2.0...0.2.1) (2025-02-17)
 
 ### Bug Fixes
