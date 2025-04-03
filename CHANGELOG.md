@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.3.1](https://github.com/JoshuaKGoldberg/eslint-plugin-erasable-syntax-only/compare/0.3.0...0.3.1) (2025-04-03)
+
+### Bug Fixes
+
+- empty commit to trigger CI ([1dd7379](https://github.com/JoshuaKGoldberg/eslint-plugin-erasable-syntax-only/commit/1dd7379ad7ae66d1f49ed7b189b7ae21455334ca))
+
 # [0.3.0](https://github.com/JoshuaKGoldberg/eslint-plugin-erasable-syntax-only/compare/0.2.1...0.3.0) (2025-03-03)
 
 ### Features
